@@ -28,5 +28,36 @@ namespace StringManipulation.Test
 
             Assert.False(result);
         }
+        [Fact]
+        public void QuantintyInWords()
+        {
+            var strOperation = new StringOperations();
+            var result = strOperation.QuantintyInWords("dog", 2);
+            Assert.StartsWith("dos", result);
+            Assert.Contains ("dogs", result);
+        }
+        [Fact]
+        public void GetStringLenght()
+        {
+            var strOperation = new StringOperations();
+
+            var res = strOperation.GetStringLength("Aguacate");
+
+            Assert.Equal(8, res);
+        }
+        [Fact]
+        public void GetStringLenght_Exception()
+        {
+            var strOperation = new StringOperations();
+
+            Assert.ThrowsAny<ArgumentNullException>(() => strOperation.GetStringLength(null));
+        }
+        [Fact]
+        public void TruncateString_Exception()
+        {
+            var strOperation = new StringOperations();
+
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => strOperation.TruncateString("Chao pescado", -1));
+        }
     }
 }
