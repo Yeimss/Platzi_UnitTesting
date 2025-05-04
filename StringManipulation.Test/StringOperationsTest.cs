@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Microsoft.Extensions.Logging;
+using Xunit;
 namespace StringManipulation.Test
 {
     public class StringOperationsTest
@@ -58,6 +59,48 @@ namespace StringManipulation.Test
             var strOperation = new StringOperations();
 
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() => strOperation.TruncateString("Chao pescado", -1));
+        }
+        [Theory]
+        [InlineData("V", 5)]
+        [InlineData("VI", 6)]
+        [InlineData("XX", 20)]
+        [InlineData("L", 50)]
+        [InlineData("XL", 40)]
+        public void FromRomanToNumber(string roman, int expected)
+        {
+            var strOperation = new StringOperations();
+
+            var res = strOperation.FromRomanToNumber(roman);
+
+            Assert.Equal(expected, res);
+        }
+        [Theory]
+        [InlineData("seres", true)]
+        [InlineData("pegajoso", false)]
+        [InlineData("oso", true)]
+        [InlineData("murcielago", false)]
+        [InlineData("ana", true)]
+        public void IsPalindrome(string word, bool expected)
+        {
+            var strOperation = new StringOperations();
+
+            var res  = strOperation.IsPalindrome(word);
+
+            Assert.Equal(expected, res);
+        }
+
+        [Theory]
+        [InlineData("Oso moteado", "Osomoteado")]
+        [InlineData("Oso pardo", "Osopardo")]
+        [InlineData("Oso panda", "Osopanda")]
+        [InlineData("Oso peresozo", "Osoperesozo")]
+        public void RemoveWhitespace(string text, string expected)
+        {
+            var strOperation = new StringOperations();
+
+            var res = strOperation.RemoveWhitespace(text);
+
+            Assert.Equal(expected, res);
         }
     }
 }
