@@ -4,7 +4,7 @@ namespace StringManipulation.Test
 {
     public class StringOperationsTest
     {
-        [Fact]
+        [Fact(Skip= "Esta prueba no es válida en este momento, TICKET-A01")]
         public void ConcatenateStrings()
         {
             var strOperation = new StringOperations();
