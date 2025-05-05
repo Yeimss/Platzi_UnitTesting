@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Xunit;
+﻿using Castle.Core.Logging;
+using Microsoft.Extensions.Logging;
+using Moq;
 namespace StringManipulation.Test
 {
     public class StringOperationsTest
@@ -101,6 +102,16 @@ namespace StringManipulation.Test
             var res = strOperation.RemoveWhitespace(text);
 
             Assert.Equal(expected, res);
+        }
+        [Fact]
+        public void CountOccurrences()
+        {
+            var mockLogger = new Mock<ILogger<StringOperations>>();
+            var strOperation = new StringOperations(mockLogger.Object);
+
+            var res = strOperation.CountOccurrences("texto prueba", 'e');
+
+            Assert.Equal(2, res);
         }
     }
 }
